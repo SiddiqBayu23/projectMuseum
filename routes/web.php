@@ -1,0 +1,116 @@
+<?php
+
+use App\Http\Controllers\AuthController; //Digunakan untuk login, register, logout.
+use Illuminate\Support\Facades\Route; //Agar bisa menggunakan fungsi Route::get(), Route::post(), dsb.
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+| Berikut ini adalah rute-rute untuk aplikasi web kamu.
+| Dipisahkan antara sebelum login dan setelah login.
+*/
+
+// =================== HALAMAN UTAMA (ROOT) ===================
+
+// Halaman Utama (root)
+Route::get('/', function () {
+    return redirect()->route('beranda'); // redirect ke /beranda
+});
+
+// =================== SEBELUM LOGIN ===================
+
+// Halaman Register
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register'); //Menampilkan form register via method showRegister() dari AuthController.
+Route::post('/register', [AuthController::class, 'register']);  //Proses data form untuk mendaftar user baru.
+
+// Halaman Login
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');  //Menampilkan form login via method showLogin().
+Route::post('/login', [AuthController::class, 'login']);  //Proses form login untuk autentikasi user
+
+
+// Menampilkan view resources/views/beranda.blade.php.
+Route::get('/beranda', function () {
+    return view('beranda');
+})->name('beranda');
+
+
+// Tentang Kami
+Route::prefix('tentangkami')->group(function () {
+    Route::get('/', function () {
+        return view('tentangkami');
+    })->name('tentangkami');
+});
+
+// Berita
+Route::prefix('berita')->group(function () {
+    Route::get('/', function () {
+        return view('berita');
+    })->name('berita');
+});
+
+// Kegiatan
+Route::prefix('kegiatan')->group(function () {
+    Route::get('/', function () {
+        return view('kegiatan');
+    })->name('kegiatan');
+});
+
+// Koleksi (bisa diakses tanpa login)
+Route::prefix('koleksi')->group(function () {
+    Route::get('/', function () {
+        return view('koleksi');
+    })->name('koleksi');
+});
+
+// Profil
+Route::get('/profil', function () {
+    return view('profil');
+})->name('profil');
+
+// Struktur Organisasi
+Route::get('/struktur', function () {
+    return view('struktur');
+})->name('struktur');
+
+// Publikasi
+Route::prefix('publikasi')->group(function () {
+    Route::get('/', function () {
+        return view('publikasi');
+    })->name('publikasi');
+});
+
+// =================== SETELAH LOGIN ===================
+// Semua route di dalam grup ini hanya bisa diakses jika user sudah login (authenticated).
+Route::middleware(['auth'])->group(function () {  
+
+    // Dashboard Admin
+    Route::get('/dashboard/admin', function () {
+        return view('dashboard.admin');
+    })->name('dashboard.admin');
+
+    // Dashboard User
+    Route::get('/dashboard/user', function () {
+        return view('dashboard.user');
+    })->name('dashboard.user');
+
+    // Logout
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+
+// KALSIFIKASI
+// routes/web.php
+Route::get('/kpm', function () {
+    return view('klasifikasi.kpm');
+});
+
+Route::get('/plakat', function () {
+    return view('klasifikasi.plakat');
+});
+
+Route::get('/surat', function () {
+    return view('klasifikasi.surat');
+});
+
+
