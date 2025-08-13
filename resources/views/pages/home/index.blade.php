@@ -102,7 +102,7 @@
     </div>
 
     {{-- Instagram & YouTube --}}
-    {{-- <div class="instagram-youtube-wrapper mt-4 p-3">
+    <div class="instagram-youtube-wrapper mt-4 p-3">
         <div class="d-flex align-items-center justify-content-center flex-wrap text-center text-black">
             <div class="col-md-4">
                 <img src="images/dongeng.jpg" alt="Poster" class="poster-img">
@@ -119,10 +119,10 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     {{-- Tabel Jadwal --}}
-    {{-- <div class="container my-5">
+    <div class="container my-5">
         <div class="row align-items-start">
             <div class="col-md-6">
                 <h4 class="fw-bold mb-3">Data Pengunjung</h4>
@@ -169,10 +169,10 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     {{-- Berita --}}
-    {{-- <div class="berita mt-4 px-3" style="margin-bottom: 1cm;">
+    <div class="berita mt-4 px-3" style="margin-bottom: 1cm;">
         <h4 class="fw-bold mb-3">Berita</h4>
         <hr>
         <div class="row text-center g-3">
@@ -189,6 +189,6 @@
             </div>
             <?php } ?>
         </div>
-    </div> --}}
+    </div>
 
 @endsection
