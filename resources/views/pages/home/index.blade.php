@@ -5,56 +5,32 @@
 @section('content')
 
     <div id="jumbotronCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-inner">
+        <div class="carousel-inner">
 
-        {{-- Slide 1 --}}
-        <div class="carousel-item active" data-bs-interval="4000">
-            <div class="position-relative">
-                <img src="{{ asset('images/museum.jpg') }}" class="d-block w-100"
-                    style="height: 100vh; object-fit: cover;" alt="Museum">
-                <!-- Overlay -->
-                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
-            </div>
-            <div class="carousel-caption d-flex flex-column justify-content-center h-100">
-                <h1 class="fw-bold display-4">SELAMAT DATANG DI MUSEUM MARITIM INDONESIA</h1>
-            </div>
+            {{-- Slide 1 --}}
+            @foreach ($banners as $index => $banner)
+                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}" data-bs-interval="4000">
+                    <div class="position-relative">
+                        <img src="{{ asset('storage/' . $banner->image) }}" class="d-block w-100"
+                            style="height: 100vh; object-fit: cover;" alt="Museum">
+                        <!-- Overlay -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+                    </div>
+                    <div class="carousel-caption d-flex flex-column justify-content-center h-100">
+                        <h1 class="fw-bold display-4">{{ $banner->title }}</h1>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
-        {{-- Slide 2 --}}
-        <div class="carousel-item" data-bs-interval="4000">
-            <div class="position-relative">
-                <img src="{{ asset('images/foto1.jpg') }}" class="d-block w-100"
-                    style="height: 100vh; object-fit: cover;" alt="Koleksi">
-                <!-- Overlay -->
-                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
-            </div>
-            <div class="carousel-caption d-flex flex-column justify-content-center h-100">
-                <h1 class="fw-bold display-4">TEMUKAN KOLEKSI BERSEJARAH</h1>
-            </div>
-        </div>
-
-        {{-- Slide 3 --}}
-        <div class="carousel-item" data-bs-interval="4000">
-            <div class="position-relative">
-                <img src="{{ asset('images/foto2.jpg') }}" class="d-block w-100"
-                    style="height: 100vh; object-fit: cover;" alt="Virtual Museum">
-                <!-- Overlay -->
-                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
-            </div>
-            <div class="carousel-caption d-flex flex-column justify-content-center h-100">
-                <h1 class="fw-bold display-4">JELAJAHI VIRTUAL MUSEUM</h1>
-            </div>
-        </div>
+        {{-- Tombol Navigasi --}}
+        <button class="carousel-control-prev" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
     </div>
-
-    {{-- Tombol Navigasi --}}
-    <button class="carousel-control-prev" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-</div>
 
     {{-- ISI HALAMAN --}}
     <div class="py-5 mt-0 pt-1 w-100">
@@ -132,7 +108,7 @@
         </div>
     </div>
 
-      {{-- Grafik dan Gambar Berdampingan --}}
+    {{-- Grafik dan Gambar Berdampingan --}}
     <div class="container my-5">
         <div class="row align-items-center">
 
@@ -144,7 +120,8 @@
             {{-- Gambar di samping grafik --}}
             <div class="col-md-6 d-flex justify-content-center align-items-center">
                 <div class="img-wrapper shadow rounded p-2 bg-light" style="max-width: 400px; width: 100%;">
-                    <img src="images/ruang-kegiatan.jpg" alt="Gambar Contoh" class="img-fluid custom-img" style="object-fit: cover;">
+                    <img src="images/ruang-kegiatan.jpg" alt="Gambar Contoh" class="img-fluid custom-img"
+                        style="object-fit: cover;">
                 </div>
             </div>
 
