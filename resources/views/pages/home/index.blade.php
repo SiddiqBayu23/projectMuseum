@@ -34,26 +34,18 @@
 
     {{-- ISI HALAMAN --}}
     <div class="py-5 mt-0 pt-1 w-100">
-        @php
-            $items = [
-                ['gambar' => 'images/foto1.jpg', 'judul' => 'KOLEKSI'],
-                ['gambar' => 'images/foto2.jpg', 'judul' => 'EVENT'],
-                ['gambar' => 'images/foto1.jpg', 'judul' => 'RUANG PAMER'],
-                ['gambar' => 'images/foto2.jpg', 'judul' => 'FASILITAS'],
-            ];
-        @endphp
 
         <div class="w-100 px-4">
             <div class="row text-center mt-4">
-                @foreach ($items as $item)
+                @foreach ($collections as $collection)
                     <div class="col-6 col-md-3 mb-3">
                         <div class="kotak-ikon border-secondary">
                             <div
                                 class="ratio ratio-1x1 d-flex justify-content-center align-items-center rounded-3 mb-3 overflow-hidden p-5">
-                                <img src="{{ asset($item['gambar']) }}" class="w-100 h-100 object-fit-cover"
-                                    alt="{{ $item['judul'] }}">
+                                <img src="{{ asset('storage/' . $collection->image) }}" class="w-100 h-100 object-fit-cover"
+                                    alt="{{ $collection->title }}">
                             </div>
-                            <div class="judul-ikon">{{ $item['judul'] }}</div>
+                            <div class="judul-ikon">{{ $collection->title }}</div>
                         </div>
                     </div>
                 @endforeach
