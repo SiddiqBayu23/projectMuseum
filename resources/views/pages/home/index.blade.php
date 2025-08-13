@@ -4,46 +4,57 @@
 
 @section('content')
 
-    {{-- JUMBOTRON SLIDE OTOMATIS --}}
     <div id="jumbotronCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
+    <div class="carousel-inner">
 
-            {{-- Slide 1 --}}
-            <div class="carousel-item active" data-bs-interval="4000">
-                <img src="{{ asset('images/museum.jpg') }}" class="d-block w-100" style="height: 100vh; object-fit: cover;"
-                    alt="Museum">
-                <div class="carousel-caption d-flex flex-column justify-content-center h-100">
-                    <h1 class="fw-bold display-4">SELAMAT DATANG DI MUSEUM MARITIM INDONESIA</h1>
-                </div>
+        {{-- Slide 1 --}}
+        <div class="carousel-item active" data-bs-interval="4000">
+            <div class="position-relative">
+                <img src="{{ asset('images/museum.jpg') }}" class="d-block w-100"
+                    style="height: 100vh; object-fit: cover;" alt="Museum">
+                <!-- Overlay -->
+                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
             </div>
-
-            {{-- Slide 2 --}}
-            <div class="carousel-item" data-bs-interval="4000">
-                <img src="{{ asset('images/foto1.jpg') }}" class="d-block w-100" style="height: 100vh; object-fit: cover;"
-                    alt="Koleksi">
-                <div class="carousel-caption d-flex flex-column justify-content-center h-100">
-                    <h1 class="fw-bold display-4">TEMUKAN KOLEKSI BERSEJARAH</h1>
-                </div>
-            </div>
-
-            {{-- Slide 3 --}}
-            <div class="carousel-item" data-bs-interval="4000">
-                <img src="{{ asset('images/foto2.jpg') }}" class="d-block w-100" style="height: 100vh; object-fit: cover;"
-                    alt="Virtual Museum">
-                <div class="carousel-caption d-flex flex-column justify-content-center h-100">
-                    <h1 class="fw-bold display-4">JELAJAHI VIRTUAL MUSEUM</h1>
-                </div>
+            <div class="carousel-caption d-flex flex-column justify-content-center h-100">
+                <h1 class="fw-bold display-4">SELAMAT DATANG DI MUSEUM MARITIM INDONESIA</h1>
             </div>
         </div>
 
-        {{-- Tombol Navigasi (Opsional) --}}
-        <button class="carousel-control-prev" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
+        {{-- Slide 2 --}}
+        <div class="carousel-item" data-bs-interval="4000">
+            <div class="position-relative">
+                <img src="{{ asset('images/foto1.jpg') }}" class="d-block w-100"
+                    style="height: 100vh; object-fit: cover;" alt="Koleksi">
+                <!-- Overlay -->
+                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+            </div>
+            <div class="carousel-caption d-flex flex-column justify-content-center h-100">
+                <h1 class="fw-bold display-4">TEMUKAN KOLEKSI BERSEJARAH</h1>
+            </div>
+        </div>
+
+        {{-- Slide 3 --}}
+        <div class="carousel-item" data-bs-interval="4000">
+            <div class="position-relative">
+                <img src="{{ asset('images/foto2.jpg') }}" class="d-block w-100"
+                    style="height: 100vh; object-fit: cover;" alt="Virtual Museum">
+                <!-- Overlay -->
+                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+            </div>
+            <div class="carousel-caption d-flex flex-column justify-content-center h-100">
+                <h1 class="fw-bold display-4">JELAJAHI VIRTUAL MUSEUM</h1>
+            </div>
+        </div>
     </div>
+
+    {{-- Tombol Navigasi --}}
+    <button class="carousel-control-prev" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
 
     {{-- ISI HALAMAN --}}
     <div class="py-5 mt-0 pt-1 w-100">
@@ -121,58 +132,59 @@
         </div>
     </div>
 
-    {{-- Tabel Jadwal --}}
+      {{-- Grafik dan Gambar Berdampingan --}}
     <div class="container my-5">
-        <div class="row align-items-start">
-            <div class="col-md-6">
-                <h4 class="fw-bold mb-3">Data Pengunjung</h4>
-                <table class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>#</th>
-                            <th>First</th>
-                            <th>Last</th>
-                            <th>Handle</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="row align-items-center">
+
+            {{-- Grafik Data Pengunjung --}}
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <div class="img-wrapper shadow rounded p-2 bg-light">
-                    <img src="images/ruang-kegiatan.jpg" alt="Gambar Contoh" class="img-fluid custom-img">
+                <canvas id="pengunjungChart" style="max-width: 100%; height: 300px;"></canvas>
+            </div>
+
+            {{-- Gambar di samping grafik --}}
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <div class="img-wrapper shadow rounded p-2 bg-light" style="max-width: 400px; width: 100%;">
+                    <img src="images/ruang-kegiatan.jpg" alt="Gambar Contoh" class="img-fluid custom-img" style="object-fit: cover;">
                 </div>
             </div>
+
         </div>
     </div>
 
+    {{-- Load Chart.js --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('pengunjungChart').getContext('2d');
+        const pengunjungChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Januari', 'Februari', 'Maret', 'April'],
+                datasets: [{
+                    label: 'Jumlah Pengunjung',
+                    data: [10, 15, 8, 12], // Data dummy, bisa diganti dari database
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 2
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
     {{-- Berita --}}
-    <div class="berita mt-4 px-3" style="margin-bottom: 1cm;">
+    <div class="berita mt-4 px-3 container" style="margin-bottom: 1cm;">
         <h4 class="fw-bold mb-3">Berita</h4>
         <hr>
         <div class="row text-center g-3">
@@ -183,6 +195,7 @@
                         <img src="images/koleksi.jpg" class="img-fluid rounded mb-2"
                             style="height: 180px; object-fit: cover;">
                         <h5 class="text-start text-dark fw-semibold mb-1">Judul Berita</h5>
+                        <p class="text-start text-muted mb-2">Tanggal Berita</p>
                         <p class="text-start text-muted small mb-0">Isi Berita</p>
                     </a>
                 </div>
