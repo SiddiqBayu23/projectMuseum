@@ -50,15 +50,32 @@
                          <span>
                              <i class="fas fa-list"></i>
                          </span>
-                         <span class="hide-menu">Kelola Navbar</span>
+                         <span class="hide-menu">Navbar</span>
                      </a>
                  </li>
                  <li class="sidebar-item">
-                     <a class="sidebar-link" href="{{ route('admin.navbar-section.index') }}" aria-expanded="false">
+                     <a class="sidebar-link" href="{{ route('admin.banners.index') }}" aria-expanded="false">
                          <span>
                              <i class="fas fa-list"></i>
                          </span>
-                         <span class="hide-menu">Kelola Jumbotron</span>
+                         <span class="hide-menu">Banner</span>
+                     </a>
+                 </li>
+
+                 <li class="sidebar-item">
+                     <a class="sidebar-link" href="{{ route('admin.collections.index') }}" aria-expanded="false">
+                         <span>
+                             <i class="fas fa-list"></i>
+                         </span>
+                         <span class="hide-menu">Koleksi</span>
+                     </a>
+                 </li>
+                 <li class="sidebar-item">
+                     <a class="sidebar-link" href="{{ route('admin.news.index') }}" aria-expanded="false">
+                         <span>
+                             <i class="fas fa-list"></i>
+                         </span>
+                         <span class="hide-menu">Berita</span>
                      </a>
                  </li>
                  {{-- <li class="sidebar-item">
@@ -78,7 +95,7 @@
                      </a>
                  </li> --}}
              </ul>
-             <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
+             {{-- <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
                  <div class="d-flex">
                      <div class="unlimited-access-title me-3">
                          <h6 class="fw-semibold fs-4 mb-6 text-dark w-85">Upgrade to pro</h6>
@@ -89,7 +106,7 @@
                          <img src="./images/backgrounds/rocket.png" alt="" class="img-fluid">
                      </div>
                  </div>
-             </div>
+             </div> --}}
          </nav>
          <!-- End Sidebar navigation -->
      </div>

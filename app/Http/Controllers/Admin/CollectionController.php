@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Banner;
+use App\Models\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class BannerController extends Controller
+class CollectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banners = Banner::get();
-        return view('pages.admin.banner.index', compact('banners'), [
-            'title' => 'Banner'
+        $collections = Collection::get();
+        return view('pages.admin.collection.index', compact('collections'), [
+            'title' => 'Collection'
         ]);
     }
 
@@ -43,22 +43,20 @@ class BannerController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'description' => 'required|string',
-            'is_active' => 'nullable|boolean',
+            'url' => 'required|url',
         ]);
 
         // Upload gambar
-        $imagePath = $request->file('image')->store('banner_images', 'public');
+        $imagePath = $request->file('image')->store('collection_images', 'public');
 
         // Simpan data banner
-        Banner::create([
+        Collection::create([
             'title' => $validated['title'],
             'image' => $imagePath,
-            'description' => $validated['description'],
-            'is_active' => $request->has('is_active') ? 1 : 0,
+            'url' => $validated['url'],
         ]);
 
-        return redirect()->back()->with('successAdd', 'Banner berhasil ditambahkan.');
+        return redirect()->back()->with('successAdd', 'Koleksi berhasil ditambahkan.');
     }
 
     /**
@@ -93,39 +91,36 @@ class BannerController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'id' => 'required|exists:banners,id',
+            'id' => 'required|exists:collections,id',
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'is_active' => 'nullable|boolean',
+            'url' => 'required|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $banner = Banner::findOrFail($request->id);
+        $collection = Collection::findOrFail($request->id);
 
         // Siapkan data update
         $dataUpdate = [
             'title' => $request->title,
-            'description' => $request->description,
-            'is_active' => $request->has('is_active') ? 1 : 0,
+            'url' => $request->url,
         ];
 
         // Jika ada gambar baru
         if ($request->hasFile('image')) {
             // Hapus gambar lama jika ada
-            if ($banner->image && Storage::exists('public/' . $banner->image)) {
-                Storage::delete('public/' . $banner->image);
+            if ($collection->image && Storage::exists('public/' . $collection->image)) {
+                Storage::delete('public/' . $collection->image);
             }
 
             // Upload gambar baru
-            $dataUpdate['image'] = $request->file('image')->store('banner_images', 'public');
+            $dataUpdate['image'] = $request->file('image')->store('collection_images', 'public');
         }
 
         // Update ke database
-        $banner->update($dataUpdate);
+        $collection->update($dataUpdate);
 
-        return redirect()->back()->with('successUpdate', 'Banner berhasil diperbarui.');
+        return redirect()->back()->with('successUpdate', 'Koleksi berhasil diperbarui.');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -137,10 +132,10 @@ class BannerController extends Controller
     {
         $id = $request->id;
 
-        $banner = Banner::findOrFail($id);
+        $collection = Collection::findOrFail($id);
 
-        $banner->delete();
+        $collection->delete();
 
-        return redirect()->back()->with('successDelete', 'Banner berhasil dihapus.');
+        return redirect()->back()->with('successDelete', 'Koleksi berhasil dihapus.');
     }
 }

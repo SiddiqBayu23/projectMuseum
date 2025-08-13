@@ -19,6 +19,7 @@
     <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/styles.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/myStyle.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
     <style>
         .dt-buttons .dt-button {
             background-color: #855cf6 !important;
@@ -110,7 +111,9 @@
             });
         });
     </script>
-    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    @yield('script')
     {{-- <script src="https://kit.fontawesome.com/72387f0abd.js" crossorigin="anonymous"></script> --}}
     <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/sidebarmenu.js') }}"></script>
