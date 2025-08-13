@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\NavbarLinkController;
+use App\Http\Controllers\Admin\NavbarSectionController;
 use App\Http\Controllers\AuthController; //Digunakan untuk login, register, logout.
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Models\NavbarSection;
 use Illuminate\Support\Facades\Route; //Agar bisa menggunakan fungsi Route::get(), Route::post(), dsb.
 
 /*
@@ -30,9 +36,7 @@ Route::post('/login', [AuthController::class, 'login']);  //Proses form login un
 
 
 // Menampilkan view resources/views/beranda.blade.php.
-Route::get('/beranda', function () {
-    return view('beranda');
-})->name('beranda');
+Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
 
 
 // Tentang Kami
@@ -82,12 +86,24 @@ Route::prefix('publikasi')->group(function () {
 
 // =================== SETELAH LOGIN ===================
 // Semua route di dalam grup ini hanya bisa diakses jika user sudah login (authenticated).
-Route::middleware(['auth'])->group(function () {  
+Route::middleware(['auth'])->group(function () {
 
     // Dashboard Admin
-    Route::get('/dashboard/admin', function () {
-        return view('dashboard.admin');
-    })->name('dashboard.admin');
+    Route::prefix('admin')->group(function () {
+        // Dashboard Admin
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+
+        Route::get('/navbar-section', [NavbarSectionController::class, 'index'])->name('admin.navbar-section.index');
+        Route::put('/navbar-section/update', [NavbarSectionController::class, 'update'])->name('admin.navbar-section.update');
+        Route::post('/navbar-links/store', [NavbarLinkController::class, 'store'])->name('admin.navbar-links.store');
+        Route::put('/navbar-links/update', [NavbarLinkController::class, 'update'])->name('admin.navbar-links.update');
+        Route::delete('/navbar-links/remove', [NavbarLinkController::class, 'destroy'])->name('admin.navbar-links.remove');
+
+        Route::post('/banners', [BannerController::class, 'store'])->name('admin.banners.index');
+        Route::post('/banners/store', [BannerController::class, 'store'])->name('admin.banners.store');
+        Route::put('/banners/update', [BannerController::class, 'update'])->name('admin.banners.update');
+        Route::delete('/banners/remove', [BannerController::class, 'destroy'])->name('admin.banners.remove');
+    });
 
     // Dashboard User
     Route::get('/dashboard/user', function () {
@@ -112,5 +128,3 @@ Route::get('/plakat', function () {
 Route::get('/surat', function () {
     return view('klasifikasi.surat');
 });
-
-

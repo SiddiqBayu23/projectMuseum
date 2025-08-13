@@ -118,6 +118,9 @@
             <label>Email</label>
             <input type="email" name="email" value="{{ old('email') }}" required>
 
+            <label for="hp">Nomor HP</label>
+            <input type="text" name="hp" id="hp" value="{{ old('hp') }}" required>
+
             <label>Password</label>
             <input type="password" name="password" required>
 

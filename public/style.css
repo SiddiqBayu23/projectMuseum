@@ -129,6 +129,7 @@ body {
   padding: 12px;
   border-radius: 6px;
   transition: 0.2s;
+  box-sizing: border-box;
 }
 
 .kotak-ikon:hover {
@@ -136,27 +137,6 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.ikon-placeholder {
-  aspect-ratio: 1 / 1;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  overflow: hidden; /* penting agar bagian gambar yang melewati container tersembunyi */
-}
-
-.ikon-placeholder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-
-.gambar-beranda{
-  width: 100%;
-}
 
 .judul-ikon{
   font-weight: bold;
@@ -164,12 +144,11 @@ body {
 
 /* /PROSEDUR LAYANAN/ */
 .prosedur {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
       background-color:  #e3eef3;
-      padding: 20px;
-      border-radius: 8px;
+    }
+
+    .prosedur .row {
+      padding: 0px 48px;
     }
 
     .kiri {

@@ -10,15 +10,18 @@ use Illuminate\Support\Facades\Cookie; //Cookie: Untuk menyimpan pesan ke browse
 
 class AuthController extends Controller
 {
-    public function showRegister() {
+    public function showRegister()
+    {
         return view('register');
-    } 
+    }
     // Menampilkan halaman register (resources/views/register.blade.php).Biasanya berisi form isian untuk daftar user baru.
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $request->validate([
             'name' => 'required', //name wajib diisi.
             'email' => 'required|email|unique:users', //email wajib, format email, dan belum ada di tabel users.
+            'hp' => 'required|regex:/^[0-9]+$/|min:10|max:15',
             'password' => 'required|confirmed|min:6', //password wajib, minimal 6 karakter, dan harus sama dengan password_confirmation.
             'role' => 'required|in:user,admin'
         ]);  //role hanya boleh user atau admin.
@@ -27,6 +30,7 @@ class AuthController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'hp' => $request->hp,
             'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);
@@ -38,11 +42,13 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
-    public function showLogin() {
+    public function showLogin()
+    {
         return view('login');
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
@@ -60,14 +66,11 @@ class AuthController extends Controller
         ])->withInput();
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
     }
-
-    
 }
-
-
