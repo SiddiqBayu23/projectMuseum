@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\NavbarLinkController as AdminNavbarLinkController
 use App\Http\Controllers\Admin\NavbarSectionController as AdminNavbarSectionController;
 use App\Http\Controllers\Admin\ServiceSectionController as AdminServiceSectionController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\VideoStreamingController as AdminVideoStreamingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;

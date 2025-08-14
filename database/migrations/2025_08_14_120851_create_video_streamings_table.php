@@ -23,7 +23,6 @@ return new class extends Migration
             $table->dateTime('start_time')->nullable();
             $table->boolean('is_live')->default(false);
             $table->timestamps();
-            $table->timestamps();
         });
     }
 
