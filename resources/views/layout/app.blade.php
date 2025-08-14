@@ -13,6 +13,12 @@
 
     {{-- Link ke file CSS eksternal --}}
     <link rel="stylesheet" href="{{ asset('style.css') }}">
+
+    <style>
+        article img {
+            width: 100%
+        }
+    </style>
 </head>
 
 <body>

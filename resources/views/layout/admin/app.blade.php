@@ -41,6 +41,21 @@
             min-height: 100vh;
             background-color: #f8f9fa
         }
+
+        .arrow-right.rotate-180 {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+
+        .arrow-right {
+            margin-right: 0;
+            /* hilangkan jarak bawaan */
+            position: absolute;
+            /* biar lepas dari flow teks */
+            right: 15px;
+            /* jarak dari sisi kanan sidebar */
+
+        }
     </style>
 </head>
 

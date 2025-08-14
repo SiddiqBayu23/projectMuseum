@@ -46,13 +46,24 @@
                      </a>
                  </li> --}}
                  <li class="sidebar-item">
-                     <a class="sidebar-link" href="{{ route('admin.navbar-section.index') }}" aria-expanded="false">
-                         <span>
-                             <i class="fa fa-list"></i>
-                         </span>
-                         <span class="hide-menu">Navbar</span>
+                     <a class="sidebar-link" href="javascript:void(0)" data-toggle="collapse"
+                         data-target="#section-submenu" aria-expanded="false" style="position: relative;">
+                         <i class="fa fa-tasks"></i>
+                         <span class="hide-menu">Section</span>
+                         <i class="fa fa-caret-down pull-right arrow-right"></i>
                      </a>
+                     <ul id="section-submenu" class="collapse first-level" style="padding-left: 20px;">
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.navbar-section.index') }}" class="sidebar-link">
+                                 <span>
+                                     <i class="fa fa-bars"></i>
+                                 </span>
+                                 <span class="hide-menu">Navbar</span>
+                             </a>
+                         </li>
+                     </ul>
                  </li>
+
                  <li class="sidebar-item">
                      <a class="sidebar-link" href="{{ route('admin.banners.index') }}" aria-expanded="false">
                          <span>
@@ -112,3 +123,13 @@
      <!-- End Sidebar scroll-->
  </aside>
  <!--  Sidebar End -->
+ @section('script')
+     <script>
+         document.querySelectorAll('[data-toggle="collapse"]').forEach(el => {
+             el.addEventListener('click', function() {
+                 let icon = this.querySelector('.fa-caret-down');
+                 icon.classList.toggle('rotate-180');
+             });
+         });
+     </script>
+ @endsection
