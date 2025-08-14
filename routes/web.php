@@ -82,10 +82,10 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/collections/update', [AdminCollectionController::class, 'update'])->name('admin.collections.update');
         Route::delete('/collections/remove', [AdminCollectionController::class, 'destroy'])->name('admin.collections.remove');
 
-        Route::get('/video-streaming', [AdminCollectionController::class, 'index'])->name('admin.collections.index');
-        Route::post('/video-streaming/store', [AdminCollectionController::class, 'store'])->name('admin.collections.store');
-        Route::put('/video-streaming/update', [AdminCollectionController::class, 'update'])->name('admin.collections.update');
-        Route::delete('/video-streaming/remove', [AdminCollectionController::class, 'destroy'])->name('admin.collections.remove');
+        Route::get('/video-streamings', [AdminVideoStreamingController::class, 'index'])->name('admin.video-streamings.index');
+        Route::post('/video-streamings/store', [AdminVideoStreamingController::class, 'store'])->name('admin.video-streamings.store');
+        Route::put('/video-streamings/update', [AdminVideoStreamingController::class, 'update'])->name('admin.video-streamings.update');
+        Route::delete('/video-streamings/remove', [AdminVideoStreamingController::class, 'destroy'])->name('admin.video-streamings.remove');
 
         Route::get('/news', [AdminNewsController::class, 'index'])->name('admin.news.index');
         Route::post('/news/store', [AdminNewsController::class, 'store'])->name('admin.news.store');

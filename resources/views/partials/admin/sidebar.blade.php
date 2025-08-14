@@ -97,7 +97,7 @@
                      </a>
                  </li>
                  <li class="sidebar-item">
-                     <a class="sidebar-link" href="{{ route('admin.news.index') }}" aria-expanded="false">
+                     <a class="sidebar-link" href="{{ route('admin.video-streamings.index') }}" aria-expanded="false">
                          <span>
                              <i class="fa fa-video"></i>
                          </span>
