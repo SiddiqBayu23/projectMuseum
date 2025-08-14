@@ -76,7 +76,7 @@
                             <img src="images/virtualmuseum.jpg" alt="Virtual Museum" class="img-fluid">
                         </a>
                         <div class="teks-gambar mt-2">
-                            <a href="https://maritimemuseum.id/">VIRTUAL MUSEUM</a>
+                            <a href="https://maritimemuseum.id/"></a>
                         </div>
                     </div>
                 </div>

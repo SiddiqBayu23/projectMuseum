@@ -1,92 +1,74 @@
 @extends('layout.app')
 
-@section('title', 'koleksi')
+@section('title', 'Koleksi')
 
 @section('content')
 
-    @php
-        $klasifikasi = [
-            ['judul' => 'Alat Makan KPM', 'img' => 'placeholder.jpg', 'link' => '/kpm'],
-            ['judul' => 'Plakat', 'img' => 'placeholder.jpg', 'link' => '/plakat'],
-            ['judul' => 'Surat Berharga', 'img' => 'placeholder.jpg', 'link' => '/surat'],
-            ['judul' => 'Mebel', 'img' => 'placeholder.jpg', 'link' => '/mebel'],
-            ['judul' => 'Bintang', 'img' => 'placeholder.jpg', 'link' => '/bintang'],
-            ['judul' => 'Pakaian', 'img' => 'placeholder.jpg', 'link' => '/pakaian'],
-            ['judul' => 'Dokumen', 'img' => 'placeholder.jpg', 'link' => '/dokumen'],
-            ['judul' => 'Lukisan', 'img' => 'placeholder.jpg', 'link' => '/lukisan'],
-            ['judul' => 'Medali', 'img' => 'placeholder.jpg', 'link' => '/medali'],
-            ['judul' => 'Peralatan Navigasi', 'img' => 'placeholder.jpg', 'link' => '/peralatan-navigasi'],
-        ];
-    @endphp
+@php
+    $klasifikasi = [
+        'Alat Makan KPM', 'Plakat', 'Surat Berharga', 'Mebel', 'Bintang', 'Pakaian',
+        'Peralatan Pelayaran', 'Alat Navigasi', 'BMKT', 'Buku', 'Kartu', 'Maket',
+        'Peralatan Dermaga', 'Alat Komunikasi', 'Diorama', 'Infografis', 'Miniatur Kapal', 'Tayangan Video'
+    ];
 
-    <div class="container-fluid py-4">
-        <!-- Dropdown & Search -->
-        <div class="row mb-3">
-            <div class="col-md-6 d-flex">
-                <!-- Dropdown -->
-                <div class="dropdown me-3 w-50">
-                    <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
-                        Klasifikasi Koleksi
-                    </button>
-                    <ul class="dropdown-menu w-100">
-                        @foreach ($klasifikasi as $item)
-                            <li>
-                                <a class="dropdown-item" href="{{ url($item['link']) }}">
-                                    {{ $item['judul'] }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+    $koleksi = [
+        ['judul' => 'Alat Makan KPM', 'img' => 'placeholder.jpg'],
+        ['judul' => 'Plakat', 'img' => 'placeholder.jpg'],
+        ['judul' => 'Surat Berharga', 'img' => 'placeholder.jpg'],
+        ['judul' => 'Mebel', 'img' => 'placeholder.jpg'],
+        ['judul' => 'Bintang', 'img' => 'placeholder.jpg'],
+        ['judul' => 'Pakaian', 'img' => 'placeholder.jpg'],
+    ];
+@endphp
 
+<div class="container py-4">
+    <div class="row">
+        <!-- Kolom kiri -->
+        <div class="col-md-3">
+            <select class="form-select mb-2">
+                <option selected>Klasifikasi Koleksi</option>
+                @foreach($klasifikasi as $item)
+                    <option>{{ $item }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- Kolom kanan -->
+        <div class="col-md-9">
             <!-- Search -->
-            <div class="col-md-6 d-flex justify-content-end">
-                <form class="d-flex w-50" role="search">
-                    <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    </div>
-                </form>
+            <div class="d-flex justify-content-end mb-3">
+                <input type="text" class="form-control w-25" placeholder="search">
             </div>
-        </div>
 
-        <!-- Paragraf -->
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <p class="text-muted" style="text-align: justify;">
-                    Museum Maritim Indonesia saat ini memiliki total 1400-an koleksi, baik asli maupun replika.
-                    Beberapa koleksi museum didapatkan dengan cara hibah, baik dari Kementerian terkait maupun
-                    pribadi yang bertemakan Kemaritiman dan Kepelabuhanan.
-                </p>
-            </div>
-        </div>
+            <!-- Paragraf -->
+            <p class="text-center text-muted">
+                Museum Maritim Indonesia saat ini memiliki total 1400-an koleksi, baik asli maupun replika.
+                Beberapa koleksi museum didapatkan dengan cara hibah, baik dari Kementerian terkait maupun
+                pribadi yang bertemakan Kemaritiman dan Kepelabuhanan
+            </p>
 
-        <!-- Klasifikasi Grid -->
-        @php
-            $klasifikasiGrid = [
-                ['judul' => 'Alat Makan KPM', 'img' => 'images/telephone.jpg'],
-                ['judul' => 'Plakat', 'img' => 'images/plakat.jpg'],
-                ['judul' => 'Surat Berharga', 'img' => 'images/museum.jpg'],
-                ['judul' => 'Mebel', 'img' => 'images/museum.jpg'],
-                ['judul' => 'Bintang', 'img' => 'images/museum.jpg'],
-                ['judul' => 'Pakaian', 'img' => 'images/museum.jpg'],
-            ];
-        @endphp
-
-        <div class="container py-5">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                @foreach ($klasifikasiGrid as $item)
-                    <div class="col d-flex">
-                        <div class="card w-100 shadow-sm">
-                            <img src="{{ asset($item['img']) }}" class="card-img-top" alt="{{ $item['judul'] }}"
-                                style="height: 220px; object-fit: cover;">
-                            <div class="card-body text-center">
-                                <h6 class="card-title mb-0">{{ $item['judul'] }}</h6>
-                            </div>
+            <!-- Grid Koleksi -->
+            <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+                @foreach($koleksi as $item)
+                <div class="col">
+                    <div class="card text-center border-0 shadow-sm h-100">
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height:180px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-image text-secondary" viewBox="0 0 16 16">
+                                <path d="M14.002 3a1 1 0 0 1 1 1v8.002a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1V4.002a1 1 0 0 1 1-1h12zM0 4.002A2 2 0 0 1 2.002 2h12A2 2 0 0 1 16 4.002v8.002a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V4.002z"/>
+                                <path d="M10.648 8.646a.5.5 0 0 0-.708 0l-2.5 2.5-1.5-1.5a.5.5 0 0 0-.708.708l1.854 1.853a.5.5 0 0 0 .708 0l2.646-2.647a.5.5 0 0 0 0-.708z"/>
+                                <path d="M6.002 5.002a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                            </svg>
+                        </div>
+                        <div class="card-footer bg-dark text-white fw-bold">
+                            {{ $item['judul'] }}
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
-        </div>
 
-    @endsection
+        </div>
+    </div>
+</div>
+
+@endsection
