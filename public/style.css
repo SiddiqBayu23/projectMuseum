@@ -1,37 +1,73 @@
-/* Hilangkan scroll horizontal */
+/* === RESET DASAR === */
 html, body {
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
-/* Custom warna navbar */
-.bg-pelindo {
-  background-color: #0475BCE6 !important;
-}
-
-/* Body */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f7fa;
 }
 
-/* Hero section */
-.hero-placeholder {
-  background-color: #dce3ec;
-  padding: 40px 0;
+/* === CUSTOM NAVBAR === */
+.bg-pelindo {
+  background-color: rgba(4, 117, 188, 0.9) !important;
+}
+
+/* === HERO / JUMBOTRON === */
+.kotak-gambar {
+  width: 100%;
+  height: 350px; /* tinggi hero */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kotak-gambar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* Overlay gelap di atas gambar */
+.kotak-gambar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+/* Teks di tengah gambar */
+.kotak-gambar .teks-jumbotron {
+  position: relative;
+  z-index: 3;
   text-align: center;
-  border-radius: 8px;
-  margin: 0 auto;
-  max-width: 100%;
+  color: white;
 }
 
-.image-icon {
-  font-size: 48px;
-  color: #6c757d;
+.kotak-gambar .teks-jumbotron h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-/* Kontainer utama konten */
+.kotak-gambar .teks-jumbotron p {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* === KONTEN UTAMA === */
 .content {
   display: flex;
   flex-direction: row;
@@ -44,7 +80,7 @@ body {
   flex-wrap: wrap;
 }
 
-/* Sidebar kiri */
+/* === SIDEBAR === */
 .sidebar {
   flex: 1 1 300px;
   max-width: 500px;
@@ -64,18 +100,17 @@ body {
   border-radius: 20px;
 }
 
-.sidebar .btn:hover {
-  background-color: #0475BCE6;
+.sidebar .btn:hover,
+.sidebar .btn.active {
+  background-color: rgba(4, 117, 188, 0.9);
   color: white;
 }
 
 .sidebar .btn.active {
-  background-color: #0475BCE6;
-  color: white;
   box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
 }
 
-/* Konten utama kanan */
+/* === MAIN CONTENT === */
 .main-content {
   flex: 2 1 500px;
   background-color: white;
@@ -97,39 +132,77 @@ body {
   color: #333;
 }
 
-/* Gambar besar bawah navbar */
-.kotak-gambar {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  gap: 20px;
+/* Hero Banner */
+.hero-banner {
+    width: 100%;
+    height: 350px;
+    position: relative;
+    overflow: hidden;
 }
 
-.kotak-gambar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Teks di atas gambar */
-.kotak-gambar .teks-jumbotron {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
 }
 
+/* Search Bar */
+.search-input {
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #ccc;
+}
+
+.btn-search {
+    background-color: #0475bc;
+    color: white;
+    border-radius: 0 20px 20px 0;
+    border: none;
+    padding: 0 15px;
+}
+
+.btn-search:hover {
+    background-color: #035a8e;
+}
+
+/* Berita Cards */
+.news-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+}
+
+.news-card img {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Pagination */
+.pagination .page-link {
+    color: #0475bc;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #0475bc;
+    border-color: #0475bc;
+}
+
+
+/* === IKON === */
 .kotak-ikon {
   background-color: #f1f1f1;
   padding: 12px;
@@ -147,29 +220,27 @@ body {
   font-weight: bold;
 }
 
-/* Prosedur Layanan */
+/* === PROSEDUR LAYANAN === */
 .prosedur {
   background-color: #e3eef3;
 }
 
 .prosedur .row {
-  padding: 0px 48px;
+  padding: 0 48px;
 }
 
-.kiri {
+.kiri,
+.kanan {
   flex: 1;
   min-width: 250px;
 }
 
 .kanan {
-  flex: 1;
-  min-width: 250px;
   position: relative;
 }
 
 .kanan img {
   width: 100%;
-  max-width: 100%;
   height: auto;
   border-radius: 8px;
   display: block;
@@ -187,19 +258,11 @@ body {
   text-decoration: none;
 }
 
-h3 {
-  margin-top: 0;
-}
-
-ol {
-  padding-left: 18px;
-}
-
-/* Instagram & YouTube */
+/* === INSTAGRAM & YOUTUBE === */
 .instagram-youtube-wrapper {
   width: 100%;
   background-color: #e3eef3;
-  text-align: center; /* pastikan teks rata tengah */
+  text-align: center;
 }
 
 .instagram-youtube {
@@ -224,7 +287,6 @@ ol {
   width: 100%;
 }
 
-/* Teks judul di tengah */
 .instagram-youtube h2 {
   width: 100%;
   font-size: 2rem;
@@ -233,7 +295,7 @@ ol {
   text-align: center;
 }
 
-/* Responsive */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .instagram-youtube {
     flex-direction: column;
@@ -243,291 +305,9 @@ ol {
     max-width: 100%;
   }
 
-  .sidebar {
+  .sidebar,
+  .main-content {
     max-width: 100%;
-  }
-}
-/* ====== EVENT PAGE CUSTOM STYLE ====== */
-
-/* Breadcrumb style */
-.breadcrumb {
-    margin-bottom: 0;
-}
-.breadcrumb-item + .breadcrumb-item::before {
-    color: #999;
-}
-
-/* Slider Event */
-.event-slider-card {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 4px;
-}
-.event-slider-card img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.event-slider-card .overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-}
-.event-slider-card .content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 15px;
-    color: white;
-}
-.event-slider-card .badge {
-    font-size: 0.75rem;
-    padding: 4px 6px;
-}
-
-/* Event Card Utama */
-.event-main-card img {
-    border-radius: 4px;
-}
-.event-main-card h5 {
-    font-weight: bold;
-}
-.event-main-card small {
-    font-size: 0.85rem;
-    color: #777;
-}
-.event-main-card p {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-/* Sidebar */
-.sidebar-title {
-    font-weight: bold;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 6px;
-    margin-bottom: 12px;
-    font-size: 0.95rem;
-}
-.sidebar-news img {
-    border-radius: 4px;
-}
-.sidebar-news small {
-    font-size: 0.85rem;
-}
-.sidebar-list li {
-    font-size: 0.85rem;
-    border-bottom: 1px dotted #ddd;
-    padding-bottom: 5px;
-}
-
-/* Button load more */
-.btn-load-more {
-    border: 1px solid #aaa;
-    background: white;
-    font-size: 0.85rem;
-    padding: 5px;
-}
-.btn-load-more:hover {
-    background: #f7f7f7;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .event-slider-card {
-        height: 150px;
-    }
-}
-
-/* News */
-
-/* ===== Hero Banner ===== */
-.hero-banner {
-    background: url('../images/banner.jpg') center/cover no-repeat;
-    height: 250px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.hero-banner::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-}
-.hero-content {
-    position: relative;
-    text-align: center;
-}
-
-/* ===== Batas Lebar Konten ===== */
-.max-content-width {
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-}
-@media (min-width: 1400px) {
-    .max-content-width {
-        max-width: 1000px;
-    }
-}
-
-/* ===== Search Bar ===== */
-.search-bar-wrapper {
-    margin-top: 15px;
-}
-.search-form .input-group {
-    border: 1px solid #ddd;
-    border-radius: 25px;
-    overflow: hidden;
-    background-color: #fff;
-    transition: all 0.3s ease;
-}
-.search-form .form-control {
-    border: none;
-    padding-left: 15px;
-    font-size: 0.95rem;
-    box-shadow: none;
-}
-.search-form .form-control:focus {
-    box-shadow: none;
-}
-.search-form .btn-search {
-    border: none;
-    background: transparent;
-    padding: 0 15px;
-    color: #555;
-    cursor: pointer;
-}
-.search-form .btn-search:hover {
-    color: #000;
-}
-
-/* ===== Kartu Berita ===== */
-.news-card {
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #eee;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-.news-card img {
-    height: 180px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-.news-card:hover img {
-    transform: scale(1.05);
-}
-.news-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-}
-.news-card h5 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #222;
-}
-.news-card p {
-    font-size: 0.85rem;
-    color: #666;
-}
-
-/* ===== Pagination ===== */
-.pagination .page-link {
-    color: #333;
-    border-radius: 50%;
-    margin: 0 3px;
-    border: none;
-    transition: background-color 0.3s ease;
-}
-.pagination .page-link:hover {
-    background-color: #eee;
-}
-.pagination .active .page-link {
-    background-color: #007bff;
-    color: white;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-    .news-card img {
-        height: 150px;
-    }
-}
-/* collection */
-/* Reset kecil supaya rapi */
-body {
-    font-family: Arial, sans-serif;
-}
-
-/* Container utama */
-.container {
-    max-width: 1200px;
-}
-
-/* Kolom kiri */
-.list-group-item {
-    border: none;
-    padding: 8px 12px;
-    font-size: 14px;
-    color: #333;
-}
-
-.list-group-item:hover {
-    background-color: #f0f0f0;
-}
-
-/* Dropdown klasifikasi */
-.form-select {
-    font-size: 14px;
-}
-
-/* Search bar kanan atas */
-input[type="text"] {
-    font-size: 14px;
-    padding: 6px 10px;
-}
-
-/* Paragraf deskripsi */
-.text-muted {
-    font-size: 15px;
-    line-height: 1.6;
-    max-width: 650px;
-    margin: 0 auto;
-}
-
-/* Grid Koleksi */
-.card {
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s ease;
-}
-
-.card:hover {
-    transform: translateY(-3px);
-}
-
-/* Gambar placeholder */
-.card .bg-light {
-    background-color: #f9f9f9 !important;
-}
-
-/* Footer card */
-.card-footer {
-    font-size: 14px;
-    padding: 10px 5px;
-}
-
-/* Responsif */
-@media (max-width: 768px) {
-    .d-flex.justify-content-end input {
-        width: 100% !important;
-    }
+  }
 }
