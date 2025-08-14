@@ -4,12 +4,11 @@
 
 @section('content')
 
-
     {{-- Hero Section --}}
-    <section class="hero-placeholder text-center my-4">
-        <img src="{{ asset('images/museum.jpg') }}" alt="Hero Image" class="img-fluid rounded">
-    </section>
-
+    <section class="hero-placeholder text-center p-0" style="max-height: 45vh; overflow: hidden;">
+    <img src="{{ asset('images/museum.jpg') }}" alt="Hero Image" class="img-fluid w-100" 
+         style="height: 100%; object-fit: cover; object-position: center;">
+</section>
     {{-- Main Content --}}
     <div class="container content my-5 d-flex gap-4">
         {{-- Sidebar --}}
@@ -30,7 +29,4 @@
             </p>
         </div>
     </div>
-
-    {{-- JS Bootstrap --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endsection
