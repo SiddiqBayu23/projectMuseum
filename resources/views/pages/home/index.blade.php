@@ -127,23 +127,28 @@
         <div class="berita mt-4 px-3 container" style="margin-bottom: 1cm;">
             <h4 class="fw-bold mb-3">Berita</h4>
             <hr>
-            <div class="row text-center g-3">
-                @foreach ($news as $news)
-                    <div class="col-md-3">
-                        <div class="bg-light p-3 rounded shadow-sm h-100 overflow-hidden">
-                            <a href="#" class="text-decoration-none d-block h-100">
-                                <img src="{{ asset('storage/' . $news->image) }}" class="img-fluid rounded mb-2"
-                                    style="height: 180px; object-fit: cover;">
-                                <h5 class="text-start text-dark fw-semibold mb-1 text-truncate">{{ $news->title }}</h5>
-                                <p class="text-start text-muted mb-2" style="font-size: 12px">
-                                    {{ $news->created_at->translatedFormat('j F Y') }}
-                                </p>
-                                <p class="text-start text-muted small mb-0">{{ Str::limit($news->summary, 100, '...') }}</p>
+            <div class="row g-3">
+                @foreach ($news as $item)
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="bg-light rounded shadow-sm h-100 overflow-hidden">
+                            <a href="{{ route('news.show', $item->slug) }}" class="text-decoration-none d-block h-100">
+                                <div style="height: 180px; overflow: hidden;">
+                                    <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}"
+                                        class="w-100 h-100" style="object-fit: cover;">
+                                </div>
+                                <div class="p-3">
+                                    <h5 class="text-dark fw-semibold mb-1 text-truncate">{{ $item->title }}</h5>
+                                    <p class="text-muted mb-2" style="font-size: 12px">
+                                        {{ $item->created_at->translatedFormat('j F Y') }}
+                                    </p>
+                                    <p class="text-muted small mb-0">{{ Str::limit($item->summary, 100, '...') }}</p>
+                                </div>
                             </a>
                         </div>
                     </div>
                 @endforeach
             </div>
+
         </div>
     @endif
 

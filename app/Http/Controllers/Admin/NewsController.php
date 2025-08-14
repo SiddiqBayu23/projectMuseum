@@ -119,17 +119,19 @@ class NewsController extends Controller
             'is_publish' => 'nullable|boolean',
         ]);
 
-        $news = News::findOrFail($request->id);
-
-        $slug = $this->generateUniqueSlug($request->title);
+        $news = News::findOrFail($request->id);;
 
         $dataUpdate = [
             'title' => $request->title,
-            'slug' => $slug,
             'summary' => $request->summary,
             'content' => $request->content,
             'is_publish' => $request->has('is_publish') ? 1 : 0,
         ];
+
+        if ($request->title !== $news->title) {
+            $dataUpdate['slug'] = $this->generateUniqueSlug($request->title);
+        }
+
 
         if ($request->hasFile('image')) {
             if ($news->image && Storage::exists('public/' . $news->image)) {

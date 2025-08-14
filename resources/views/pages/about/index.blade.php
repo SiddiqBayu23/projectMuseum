@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'tentangkami')
+@section('title', 'Tentang Kami')
 
 @section('content')
 
@@ -16,7 +16,7 @@
         {{-- Sidebar --}}
         <div class="sidebar">
             <a href="profil" class="btn btn-outline-primary w-100 mb-2">Profil</a>
-            <a href="tentangkami" class="btn btn-primary w-100 mb-2">Visi dan Misi</a>
+            <a href="/tentang-kami" class="btn btn-primary w-100 mb-2">Visi dan Misi</a>
             <a href="struktur" class="btn btn-outline-primary w-100 mb-2">Struktur Organisasi</a>
         </div>
 

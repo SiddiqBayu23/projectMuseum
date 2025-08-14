@@ -15,7 +15,7 @@
         {{-- Sidebar --}}
         <div class="sidebar">
             <a href="{{ url('/profil') }}" class="btn btn-outline-primary w-100 mb-2">Profil</a>
-            <a href="{{ url('/tentangkami') }}" class="btn btn-primary w-100 mb-2">Visi dan Misi</a>
+            <a href="{{ url('/tentang-kami') }}" class="btn btn-primary w-100 mb-2">Visi dan Misi</a>
             <a href="{{ url('/struktur') }}" class="btn btn-outline-primary w-100 mb-2">Struktur Organisasi</a>
         </div>
 

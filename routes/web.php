@@ -28,6 +28,7 @@ Route::middleware(['unique.visitor'])->group(function () {
     Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 
     Route::get('/berita', [NewsController::class, 'index'])->name('news');
+    Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('news.show');
 
     Route::get('/kegiatan', [ActivityController::class, 'index'])->name('activity');
 

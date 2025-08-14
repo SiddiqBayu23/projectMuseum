@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -43,9 +44,14 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $news = News::where('slug', $slug)->firstOrFail();
+        $relatedNews = News::where('id', '!=', $news->id)
+            ->latest()
+            ->take(4)
+            ->get();
+        return view('pages.news.detail', compact('news', 'relatedNews'));
     }
 
     /**
