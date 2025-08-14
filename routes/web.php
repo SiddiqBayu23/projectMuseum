@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BannerController as AdminBannerController;
 use App\Http\Controllers\Admin\CollectionController as AdminCollectionController;
 use App\Http\Controllers\Admin\NavbarLinkController as AdminNavbarLinkController;
 use App\Http\Controllers\Admin\NavbarSectionController as AdminNavbarSectionController;
+use App\Http\Controllers\Admin\ServiceSectionController as AdminServiceSectionController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollectionController;
@@ -54,6 +55,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
 
+        Route::get('/', function () {
+            return redirect()->route('admin.dashboard.index');
+        });
+
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
 
         Route::get('/navbar-section', [AdminNavbarSectionController::class, 'index'])->name('admin.navbar-section.index');
@@ -61,6 +66,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/navbar-links/store', [AdminNavbarLinkController::class, 'store'])->name('admin.navbar-links.store');
         Route::put('/navbar-links/update', [AdminNavbarLinkController::class, 'update'])->name('admin.navbar-links.update');
         Route::delete('/navbar-links/remove', [AdminNavbarLinkController::class, 'destroy'])->name('admin.navbar-links.remove');
+
+        Route::get('/service-section', [AdminServiceSectionController::class, 'index'])->name('admin.service-section.index');
+        Route::put('/service-section/update', [AdminServiceSectionController::class, 'update'])->name('admin.service-section.update');
+
 
         Route::get('/banners', [AdminBannerController::class, 'index'])->name('admin.banners.index');
         Route::post('/banners/store', [AdminBannerController::class, 'store'])->name('admin.banners.store');
@@ -71,6 +80,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/collections/store', [AdminCollectionController::class, 'store'])->name('admin.collections.store');
         Route::put('/collections/update', [AdminCollectionController::class, 'update'])->name('admin.collections.update');
         Route::delete('/collections/remove', [AdminCollectionController::class, 'destroy'])->name('admin.collections.remove');
+
+        Route::get('/video-streaming', [AdminCollectionController::class, 'index'])->name('admin.collections.index');
+        Route::post('/video-streaming/store', [AdminCollectionController::class, 'store'])->name('admin.collections.store');
+        Route::put('/video-streaming/update', [AdminCollectionController::class, 'update'])->name('admin.collections.update');
+        Route::delete('/video-streaming/remove', [AdminCollectionController::class, 'destroy'])->name('admin.collections.remove');
 
         Route::get('/news', [AdminNewsController::class, 'index'])->name('admin.news.index');
         Route::post('/news/store', [AdminNewsController::class, 'store'])->name('admin.news.store');

@@ -41,14 +41,16 @@
             <div class="row text-center mt-4">
                 @foreach ($collections as $collection)
                     <div class="col-6 col-md-3 mb-3">
-                        <div class="kotak-ikon border-secondary">
-                            <div
-                                class="ratio ratio-1x1 d-flex justify-content-center align-items-center rounded-3 mb-3 overflow-hidden p-5">
-                                <img src="{{ asset('storage/' . $collection->image) }}" class="w-100 h-100 object-fit-cover"
-                                    alt="{{ $collection->title }}">
+                        <a href="{{ url($collection->url) }}" class="text-decoration-none text-secondary">
+                            <div class="kotak-ikon border-secondary">
+                                <div
+                                    class="ratio ratio-1x1 d-flex justify-content-center align-items-center rounded-3 mb-3 overflow-hidden p-5">
+                                    <img src="{{ asset('storage/' . $collection->image) }}"
+                                        class="w-100 h-100 object-fit-cover" alt="{{ $collection->title }}">
+                                </div>
+                                <div class="judul-ikon">{{ $collection->title }}</div>
                             </div>
-                            <div class="judul-ikon">{{ $collection->title }}</div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>

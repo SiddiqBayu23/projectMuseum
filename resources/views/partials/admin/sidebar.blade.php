@@ -61,6 +61,14 @@
                                  <span class="hide-menu">Navbar</span>
                              </a>
                          </li>
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.service-section.index') }}" class="sidebar-link">
+                                 <span>
+                                     <i class="fa fa-bars"></i>
+                                 </span>
+                                 <span class="hide-menu">Layanan</span>
+                             </a>
+                         </li>
                      </ul>
                  </li>
 
@@ -86,6 +94,14 @@
                              <i class="fa fa-file-text"></i>
                          </span>
                          <span class="hide-menu">Berita</span>
+                     </a>
+                 </li>
+                 <li class="sidebar-item">
+                     <a class="sidebar-link" href="{{ route('admin.news.index') }}" aria-expanded="false">
+                         <span>
+                             <i class="fa fa-video"></i>
+                         </span>
+                         <span class="hide-menu">Video & Streaming</span>
                      </a>
                  </li>
                  {{-- <li class="sidebar-item">

@@ -43,7 +43,7 @@ class CollectionController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'url' => 'required|url',
+            'url' => 'required',
         ]);
 
         // Upload gambar
@@ -93,7 +93,7 @@ class CollectionController extends Controller
         $request->validate([
             'id' => 'required|exists:collections,id',
             'title' => 'required|string|max:255',
-            'url' => 'required|url',
+            'url' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
