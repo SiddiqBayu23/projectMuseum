@@ -4,33 +4,35 @@
 
 @section('content')
 
-    <div id="jumbotronCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
+    @if ($banners->count() > 0)
+        <div id="jumbotronCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
 
-            {{-- Slide 1 --}}
-            @foreach ($banners as $index => $banner)
-                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}" data-bs-interval="4000">
-                    <div class="position-relative">
-                        <img src="{{ asset('storage/' . $banner->image) }}" class="d-block w-100"
-                            style="height: 100vh; object-fit: cover;" alt="Museum">
-                        <!-- Overlay -->
-                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+                {{-- Slide 1 --}}
+                @foreach ($banners as $index => $banner)
+                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}" data-bs-interval="4000">
+                        <div class="position-relative">
+                            <img src="{{ asset('storage/' . $banner->image) }}" class="d-block w-100"
+                                style="height: 100vh; object-fit: cover;" alt="Museum">
+                            <!-- Overlay -->
+                            <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+                        </div>
+                        <div class="carousel-caption d-flex flex-column justify-content-center h-100">
+                            <h1 class="fw-bold display-4">{{ $banner->title }}</h1>
+                        </div>
                     </div>
-                    <div class="carousel-caption d-flex flex-column justify-content-center h-100">
-                        <h1 class="fw-bold display-4">{{ $banner->title }}</h1>
-                    </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
+
+            {{-- Tombol Navigasi --}}
+            <button class="carousel-control-prev" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
-
-        {{-- Tombol Navigasi --}}
-        <button class="carousel-control-prev" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#jumbotronCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-    </div>
+    @endif
 
     {{-- ISI HALAMAN --}}
     <div class="py-5 mt-0 pt-1 w-100">
@@ -120,17 +122,43 @@
         </div>
     </div>
 
-    {{-- Load Chart.js --}}
+    {{-- Berita --}}
+    @if ($news->count() > 0)
+        <div class="berita mt-4 px-3 container" style="margin-bottom: 1cm;">
+            <h4 class="fw-bold mb-3">Berita</h4>
+            <hr>
+            <div class="row text-center g-3">
+                @foreach ($news as $news)
+                    <div class="col-md-3">
+                        <div class="bg-light p-3 rounded shadow-sm h-100 overflow-hidden">
+                            <a href="#" class="text-decoration-none d-block h-100">
+                                <img src="{{ asset('storage/' . $news->image) }}" class="img-fluid rounded mb-2"
+                                    style="height: 180px; object-fit: cover;">
+                                <h5 class="text-start text-dark fw-semibold mb-1 text-truncate">{{ $news->title }}</h5>
+                                <p class="text-start text-muted mb-2" style="font-size: 12px">
+                                    {{ $news->created_at->translatedFormat('j F Y') }}
+                                </p>
+                                <p class="text-start text-muted small mb-0">{{ Str::limit($news->summary, 100, '...') }}</p>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
+@endsection
+@section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('pengunjungChart').getContext('2d');
         const pengunjungChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Januari', 'Februari', 'Maret', 'April'],
+                labels: @json($labels),
                 datasets: [{
                     label: 'Jumlah Pengunjung',
-                    data: [10, 15, 8, 12], // Data dummy, bisa diganti dari database
+                    data: @json($data), // Data dummy, bisa diganti dari database
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2,
@@ -151,26 +179,4 @@
             }
         });
     </script>
-
-    {{-- Berita --}}
-    <div class="berita mt-4 px-3 container" style="margin-bottom: 1cm;">
-        <h4 class="fw-bold mb-3">Berita</h4>
-        <hr>
-        <div class="row text-center g-3">
-            <?php for ($i = 0; $i < 4; $i++) { ?>
-            <div class="col-md-3">
-                <div class="bg-light p-3 rounded shadow-sm h-100">
-                    <a href="#" class="text-decoration-none d-block h-100">
-                        <img src="images/koleksi.jpg" class="img-fluid rounded mb-2"
-                            style="height: 180px; object-fit: cover;">
-                        <h5 class="text-start text-dark fw-semibold mb-1">Judul Berita</h5>
-                        <p class="text-start text-muted mb-2">Tanggal Berita</p>
-                        <p class="text-start text-muted small mb-0">Isi Berita</p>
-                    </a>
-                </div>
-            </div>
-            <?php } ?>
-        </div>
-    </div>
-
 @endsection

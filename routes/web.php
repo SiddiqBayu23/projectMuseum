@@ -1,136 +1,92 @@
 <?php
 
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\CollectionController;
-use App\Http\Controllers\Admin\NavbarLinkController;
-use App\Http\Controllers\Admin\NavbarSectionController;
-use App\Http\Controllers\Admin\NewsController;
-use App\Http\Controllers\AuthController; //Digunakan untuk login, register, logout.
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\Admin\BannerController as AdminBannerController;
+use App\Http\Controllers\Admin\CollectionController as AdminCollectionController;
+use App\Http\Controllers\Admin\NavbarLinkController as AdminNavbarLinkController;
+use App\Http\Controllers\Admin\NavbarSectionController as AdminNavbarSectionController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\HomeController;
-use App\Models\NavbarSection;
-use Illuminate\Support\Facades\Route; //Agar bisa menggunakan fungsi Route::get(), Route::post(), dsb.
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\StructureController;
+use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-| Berikut ini adalah rute-rute untuk aplikasi web kamu.
-| Dipisahkan antara sebelum login dan setelah login.
-*/
-
-// =================== HALAMAN UTAMA (ROOT) ===================
-
-// Halaman Utama (root)
 Route::get('/', function () {
-    return redirect()->route('beranda'); // redirect ke /beranda
+    return redirect()->route('home');
 });
 
-// =================== SEBELUM LOGIN ===================
+Route::middleware(['unique.visitor'])->group(function () {
 
-// Halaman Register
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register'); //Menampilkan form register via method showRegister() dari AuthController.
-Route::post('/register', [AuthController::class, 'register']);  //Proses data form untuk mendaftar user baru.
+    Route::get('/beranda', [HomeController::class, 'index'])->name('home');
 
-// Halaman Login
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');  //Menampilkan form login via method showLogin().
-Route::post('/login', [AuthController::class, 'login']);  //Proses form login untuk autentikasi user
+    Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 
+    Route::get('/berita', [NewsController::class, 'index'])->name('news');
 
-// Menampilkan view resources/views/beranda.blade.php.
-Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
+    Route::get('/kegiatan', [ActivityController::class, 'index'])->name('activity');
 
+    Route::get('/koleksi', [CollectionController::class, 'index'])->name('collection');
 
-// Tentang Kami
-Route::prefix('tentangkami')->group(function () {
-    Route::get('/', function () {
-        return view('tentangkami');
-    })->name('tentangkami');
+    Route::get('/profil', [ProfileController::class, 'index'])->name('profile');
+
+    Route::get('/struktur', [StructureController::class, 'index'])->name('structure');
+
+    Route::get('/publikasi', [PublicationController::class, 'index'])->name('publication');
 });
 
-// Berita
-Route::prefix('berita')->group(function () {
-    Route::get('/', function () {
-        return view('berita');
-    })->name('berita');
+
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
 });
 
-// Kegiatan
-Route::prefix('kegiatan')->group(function () {
-    Route::get('/', function () {
-        return view('kegiatan');
-    })->name('kegiatan');
-});
-
-// Koleksi (bisa diakses tanpa login)
-Route::prefix('koleksi')->group(function () {
-    Route::get('/', function () {
-        return view('koleksi');
-    })->name('koleksi');
-});
-
-// Profil
-Route::get('/profil', function () {
-    return view('profil');
-})->name('profil');
-
-// Struktur Organisasi
-Route::get('/struktur', function () {
-    return view('struktur');
-})->name('struktur');
-
-// Publikasi
-Route::prefix('publikasi')->group(function () {
-    Route::get('/', function () {
-        return view('publikasi');
-    })->name('publikasi');
-});
-
-// =================== SETELAH LOGIN ===================
-// Semua route di dalam grup ini hanya bisa diakses jika user sudah login (authenticated).
 Route::middleware(['auth'])->group(function () {
-    // Dashboard Admin
+
     Route::prefix('admin')->group(function () {
-        // Dashboard Admin
 
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
 
-        Route::get('/navbar-section', [NavbarSectionController::class, 'index'])->name('admin.navbar-section.index');
-        Route::put('/navbar-section/update', [NavbarSectionController::class, 'update'])->name('admin.navbar-section.update');
-        Route::post('/navbar-links/store', [NavbarLinkController::class, 'store'])->name('admin.navbar-links.store');
-        Route::put('/navbar-links/update', [NavbarLinkController::class, 'update'])->name('admin.navbar-links.update');
-        Route::delete('/navbar-links/remove', [NavbarLinkController::class, 'destroy'])->name('admin.navbar-links.remove');
+        Route::get('/navbar-section', [AdminNavbarSectionController::class, 'index'])->name('admin.navbar-section.index');
+        Route::put('/navbar-section/update', [AdminNavbarSectionController::class, 'update'])->name('admin.navbar-section.update');
+        Route::post('/navbar-links/store', [AdminNavbarLinkController::class, 'store'])->name('admin.navbar-links.store');
+        Route::put('/navbar-links/update', [AdminNavbarLinkController::class, 'update'])->name('admin.navbar-links.update');
+        Route::delete('/navbar-links/remove', [AdminNavbarLinkController::class, 'destroy'])->name('admin.navbar-links.remove');
 
-        Route::get('/banners', [BannerController::class, 'index'])->name('admin.banners.index');
-        Route::post('/banners/store', [BannerController::class, 'store'])->name('admin.banners.store');
-        Route::put('/banners/update', [BannerController::class, 'update'])->name('admin.banners.update');
-        Route::delete('/banners/remove', [BannerController::class, 'destroy'])->name('admin.banners.remove');
+        Route::get('/banners', [AdminBannerController::class, 'index'])->name('admin.banners.index');
+        Route::post('/banners/store', [AdminBannerController::class, 'store'])->name('admin.banners.store');
+        Route::put('/banners/update', [AdminBannerController::class, 'update'])->name('admin.banners.update');
+        Route::delete('/banners/remove', [AdminBannerController::class, 'destroy'])->name('admin.banners.remove');
 
-        Route::get('/collections', [CollectionController::class, 'index'])->name('admin.collections.index');
-        Route::post('/collections/store', [CollectionController::class, 'store'])->name('admin.collections.store');
-        Route::put('/collections/update', [CollectionController::class, 'update'])->name('admin.collections.update');
-        Route::delete('/collections/remove', [CollectionController::class, 'destroy'])->name('admin.collections.remove');
+        Route::get('/collections', [AdminCollectionController::class, 'index'])->name('admin.collections.index');
+        Route::post('/collections/store', [AdminCollectionController::class, 'store'])->name('admin.collections.store');
+        Route::put('/collections/update', [AdminCollectionController::class, 'update'])->name('admin.collections.update');
+        Route::delete('/collections/remove', [AdminCollectionController::class, 'destroy'])->name('admin.collections.remove');
 
-        Route::get('/news', [NewsController::class, 'index'])->name('admin.news.index');
-        Route::post('/news/store', [NewsController::class, 'store'])->name('admin.news.store');
-        Route::put('/news/update', [NewsController::class, 'update'])->name('admin.news.update');
-        Route::delete('/news/remove', [NewsController::class, 'destroy'])->name('admin.news.remove');
+        Route::get('/news', [AdminNewsController::class, 'index'])->name('admin.news.index');
+        Route::post('/news/store', [AdminNewsController::class, 'store'])->name('admin.news.store');
+        Route::put('/news/update', [AdminNewsController::class, 'update'])->name('admin.news.update');
+        Route::delete('/news/remove', [AdminNewsController::class, 'destroy'])->name('admin.news.remove');
 
-        Route::post('/news/upload-image', [NewsController::class, 'uploadImage'])->name('admin.news.upload-image');
+        Route::post('/news/upload-image', [AdminNewsController::class, 'uploadImage'])->name('admin.news.upload-image');
     });
 
-    // Dashboard User
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::get('/dashboard/user', function () {
         return view('dashboard.user');
     })->name('dashboard.user');
-
-    // Logout
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 
-// KALSIFIKASI
-// routes/web.php
 Route::get('/kpm', function () {
     return view('klasifikasi.kpm');
 });

@@ -28,5 +28,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'role' => 'admin'
         ]);
+
+        $this->call(VisitorSeeder::class);
     }
 }

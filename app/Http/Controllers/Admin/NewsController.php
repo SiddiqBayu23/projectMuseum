@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class NewsController extends Controller
@@ -107,10 +108,55 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'id'        => 'required|exists:news,id',
+            'title'     => 'required|string|max:255',
+            'summary'   => 'required|string|max:255',
+            'content'   => 'required|string',
+            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'is_publish' => 'nullable|boolean',
+        ]);
+
+        $news = News::findOrFail($request->id);
+
+        $slug = $this->generateUniqueSlug($request->title);
+
+        $dataUpdate = [
+            'title' => $request->title,
+            'slug' => $slug,
+            'summary' => $request->summary,
+            'content' => $request->content,
+            'is_publish' => $request->has('is_publish') ? 1 : 0,
+        ];
+
+        if ($request->hasFile('image')) {
+            if ($news->image && Storage::exists('public/' . $news->image)) {
+                Storage::delete('public/' . $news->image);
+            }
+
+            $dataUpdate['image'] = $request->file('image')->store('news_images', 'public');
+        }
+
+        preg_match_all('/<img[^>]+src="([^">]+)"/i', $news->content, $oldImages);
+        preg_match_all('/<img[^>]+src="([^">]+)"/i', $request->content, $newImages);
+
+        $deletedImages = array_diff($oldImages[1], $newImages[1]);
+
+        foreach ($deletedImages as $imgPath) {
+            $relativePath = str_replace(asset('storage') . '/', '', $imgPath);
+            if (Storage::exists('public/' . $relativePath)) {
+                Storage::delete('public/' . $relativePath);
+            }
+        }
+
+        $news->update($dataUpdate);
+
+        return redirect()->back()->with('successUpdate', 'Berita berhasil diperbarui.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -118,10 +164,28 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $news = News::findOrFail($request->id);
+
+        if ($news->image && Storage::exists('public/' . $news->image)) {
+            Storage::delete('public/' . $news->image);
+        }
+
+        preg_match_all('/<img[^>]+src="([^">]+)"/i', $news->content, $imagesInContent);
+
+        foreach ($imagesInContent[1] as $imgPath) {
+            $relativePath = str_replace(asset('storage') . '/', '', $imgPath);
+            if (Storage::exists('public/' . $relativePath)) {
+                Storage::delete('public/' . $relativePath);
+            }
+        }
+
+        $news->delete();
+
+        return redirect()->back()->with('successDelete', 'Berita berhasil dihapus.');
     }
+
 
     public function uploadImage(Request $request)
     {

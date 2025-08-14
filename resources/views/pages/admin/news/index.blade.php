@@ -1,5 +1,5 @@
 @extends('layout.admin.app')
-@section('title', 'Navbar Section')
+@section('title', 'News')
 @section('content')
     <div>
         <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#addCollection">Tambah
@@ -77,23 +77,23 @@
                                     style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                         </td>
-                        <td class="text-truncate">{{ $news->summary }}</td>
+                        <td>{{ Str::limit($news->summary, 100, '...') }}</td>
                         <td>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#updateCollection{{ $news->id }}">Edit</button>
-                                <div class="modal fade" id="updateCollection{{ $news->id }}" tabindex="-1"
+                                    data-bs-target="#updateNews{{ $news->id }}">Edit</button>
+                                <div class="modal fade" id="updateNews{{ $news->id }}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                    Edit Koleksi
+                                                    Edit Berita
                                                 </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form method="POST" action="{{ route('admin.collections.update') }}"
+                                            <form method="POST" action="{{ route('admin.news.update') }}"
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 @method('put')
@@ -101,9 +101,9 @@
                                                     <input type="hidden" name="id" value="{{ $news->id }}">
                                                     <div class="mb-3">
                                                         <label for="title" class="form-label">Judul</label>
-                                                        <input type="text" id="title" name="title"
-                                                            class="form-control" value="{{ old('title', $news->title) }}"
-                                                            required>
+                                                        <input type="text" required id="title" name="title"
+                                                            class="form-control"
+                                                            value="{{ old('title', $news->title) }}">
                                                     </div>
 
                                                     <div class="mb-3">
@@ -112,20 +112,37 @@
                                                             <div class="mb-2">
                                                                 <img src="{{ asset('storage/' . $news->image) }}"
                                                                     alt="Preview"
-                                                                    style="width:100px; height:100px; object-fit:cover; border-radius:8px;">
+                                                                    style="max-width: 150px; border-radius: 4px;">
                                                             </div>
                                                         @endif
                                                         <input type="file" id="image" name="image"
                                                             class="form-control" accept="image/*">
                                                         <small class="text-muted">Kosongkan jika tidak ingin mengganti
-                                                            gambar.</small>
+                                                            gambar</small>
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label for="url" class="form-label">URL</label>
-                                                        <input type="text" id="url" name="url"
-                                                            class="form-control" value="{{ old('url', $news->url) }}"
-                                                            required>
+                                                        <label for="summary" class="form-label">Summary</label>
+                                                        <input type="text" required id="summary" name="summary"
+                                                            class="form-control"
+                                                            value="{{ old('summary', $news->summary) }}">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="content" class="form-label">Konten</label>
+                                                        <div class="quill-editor" style="height: 250px;"
+                                                            data-target="content-update">
+                                                            {!! old('content', $news->content) !!}
+                                                        </div>
+                                                        <input type="hidden" name="content" id="content-update"
+                                                            value="{{ old('content', $news->content) }}">
+                                                    </div>
+
+                                                    <div class="mb-3 form-check">
+                                                        <input type="checkbox" class="form-check-input" id="is_publish"
+                                                            name="is_publish" value="1"
+                                                            {{ old('is_publish', $news->is_publish) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="is_publish">Publish</label>
                                                     </div>
 
                                                 </div>
@@ -139,19 +156,19 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#deleteCollection{{ $news->id }}">Hapus</button>
-                                <div class="modal fade" id="deleteCollection{{ $news->id }}" tabindex="-1"
+                                    data-bs-target="#deleteNews{{ $news->id }}">Hapus</button>
+                                <div class="modal fade" id="deleteNews{{ $news->id }}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                    Hapus Koleksi
+                                                    Hapus Berita
                                                 </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form method="POST" action="{{ route('admin.collections.remove') }}">
+                                            <form method="POST" action="{{ route('admin.news.remove') }}">
                                                 @csrf
                                                 @method('delete')
                                                 <div class="modal-body px-4">
@@ -252,6 +269,8 @@
         var quillEditors = [];
 
         document.querySelectorAll('.quill-editor').forEach(function(el) {
+            var hiddenInput = el.parentElement.querySelector('input[type="hidden"]');
+
             var quill = new Quill(el, {
                 theme: 'snow',
                 modules: {
@@ -292,9 +311,7 @@
                 }
             });
 
-            // Set initial content dari hidden input
-            var targetId = el.getAttribute('data-target');
-            var hiddenInput = document.getElementById(targetId);
+            // Set initial content
             if (hiddenInput && hiddenInput.value) {
                 quill.root.innerHTML = hiddenInput.value;
             }
@@ -304,6 +321,7 @@
                 target: hiddenInput
             });
         });
+
 
         // Saat form submit, isi hidden input sesuai konten Quill
         document.querySelectorAll('form').forEach(function(form) {

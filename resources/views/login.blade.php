@@ -1,78 +1,64 @@
-<!doctype html>
-<html lang="en">
+@extends('layout.admin.app')
+@section('title', 'Login')
+@section('content')
+    <section class="vh-100 d-flex align-items-center bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Image Section -->
+                <div class="col-lg-6 mb-4 mb-lg-0 d-flex align-items-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                        class="img-fluid rounded" alt="Login illustration">
+                </div>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pelindo Museum Maritim</title>
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-</head>
+                <!-- Form Section -->
+                <div class="col-lg-5">
+                    <div class="card shadow-sm border-0 rounded-4 p-4">
+                        <h3 class="text-center mb-4">Login</h3>
 
-<body>
-    {{-- login --}}
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
-    <body>
-        <section class="vh-100">
-            <div class="container-fluid h-custom">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-md-9 col-lg-6 col-xl-5">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                            class="img-fluid" alt="Sample image">
-                    </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul class="mb-0">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            <div class="form-outline mb-4">
-                                <input type="email" name="email" class="form-control form-control-lg"
-                                    placeholder="Enter a valid email address" required />
+                            <div class="mb-3">
                                 <label class="form-label">Email address</label>
+                                <input type="email" name="email" class="form-control form-control-lg"
+                                    placeholder="Enter your email" required>
                             </div>
 
-                            <div class="form-outline mb-3">
-                                <input type="password" name="password" class="form-control form-control-lg"
-                                    placeholder="Enter password" required />
+                            <div class="mb-3">
                                 <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control form-control-lg"
+                                    placeholder="Enter your password" required>
                             </div>
 
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="form-check mb-0">
-                                    <input class="form-check-input me-2" type="checkbox" name="remember"
-                                        id="remember" />
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
                                     <label class="form-check-label" for="remember">Remember me</label>
                                 </div>
-                                <a href="#" class="text-body">Forgot password?</a>
+                                <a href="#" class="small text-decoration-none">Forgot password?</a>
                             </div>
 
-                            <div class="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" class="btn btn-primary btn-lg"
-                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">
-                                    Login
-                                </button>
-                                <p class="small fw-bold mt-2 pt-1 mb-0">
-                                    Don't have an account?
-                                    <a href="{{ route('register') }}" class="link-danger">Register</a>
-                                </p>
-                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2">Login</button>
+
+                            <p class="text-center mt-3 mb-0">
+                                Don't have an account?
+                                <a href="{{ route('register') }}" class="text-primary fw-semibold">Register</a>
+                            </p>
                         </form>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-        </section>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
-        </script>
-    </body>
+@endsection

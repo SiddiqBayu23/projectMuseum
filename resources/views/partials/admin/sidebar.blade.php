@@ -18,7 +18,7 @@
                      <span class="hide-menu">Home</span>
                  </li>
                  <li class="sidebar-item">
-                     <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                     <a class="sidebar-link" href="{{ route('admin.dashboard.index') }}" aria-expanded="false">
                          <span>
                              <i class="ti ti-layout-dashboard"></i>
                          </span>
@@ -48,7 +48,7 @@
                  <li class="sidebar-item">
                      <a class="sidebar-link" href="{{ route('admin.navbar-section.index') }}" aria-expanded="false">
                          <span>
-                             <i class="fas fa-list"></i>
+                             <i class="fa fa-list"></i>
                          </span>
                          <span class="hide-menu">Navbar</span>
                      </a>
@@ -56,16 +56,15 @@
                  <li class="sidebar-item">
                      <a class="sidebar-link" href="{{ route('admin.banners.index') }}" aria-expanded="false">
                          <span>
-                             <i class="fas fa-list"></i>
+                             <i class="fa fa-image"></i>
                          </span>
                          <span class="hide-menu">Banner</span>
                      </a>
                  </li>
-
                  <li class="sidebar-item">
                      <a class="sidebar-link" href="{{ route('admin.collections.index') }}" aria-expanded="false">
                          <span>
-                             <i class="fas fa-list"></i>
+                             <i class="fa fa-archive"></i>
                          </span>
                          <span class="hide-menu">Koleksi</span>
                      </a>
@@ -73,7 +72,7 @@
                  <li class="sidebar-item">
                      <a class="sidebar-link" href="{{ route('admin.news.index') }}" aria-expanded="false">
                          <span>
-                             <i class="fas fa-list"></i>
+                             <i class="fa fa-file-text"></i>
                          </span>
                          <span class="hide-menu">Berita</span>
                      </a>

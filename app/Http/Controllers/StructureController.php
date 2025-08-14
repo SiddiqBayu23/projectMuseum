@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
-use App\Models\Collection;
-use App\Models\News;
-use App\Models\Visitor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class StructureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,23 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $visitors = Visitor::select(
-            DB::raw('DATE_FORMAT(visit_date, "%M %Y") as month'),
-            DB::raw('COUNT(DISTINCT ip_address) as total')
-        )
-            ->groupBy('month', DB::raw('YEAR(visit_date)'), DB::raw('MONTH(visit_date)'))
-            ->orderBy('visit_date', 'desc')
-            ->take(12)
-            ->get()
-            ->reverse();
-
-        $labels = $visitors->pluck('month');
-        $data = $visitors->pluck('total');
-
-        $banners = Banner::where('is_active', 1)->get();
-        $collections = Collection::get();
-        $news = News::limit(4)->orderBy('created_at', 'desc')->get();
-        return view('pages.home.index', compact('banners', 'collections', 'news', 'labels', 'data'));
+        return view('pages.structure.index');
     }
 
     /**
