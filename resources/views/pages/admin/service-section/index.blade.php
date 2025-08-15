@@ -4,7 +4,7 @@
     <div>
         <div class="d-flex flex-column gap-2 mb-2 w-100">
             <div class="position-relative w-100 overflow-hidden mb-2" style="height: 300px;">
-                <img src="{{ $serviceSection->image ? asset('storage/' . $serviceSection->image) : asset('images/virtualmuseum.jpg') }}"
+                <img src="{{ $serviceSection->thumbnail ? asset('storage/' . $serviceSection->thumbnail) : asset('images/virtualmuseum.jpg') }}"
                     class="position-absolute w-100 h-100" style="object-fit: cover; object-position: center;"
                     alt="{{ $serviceSection->title }}">
             </div>

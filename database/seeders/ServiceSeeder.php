@@ -20,7 +20,7 @@ class ServiceSeeder extends Seeder
                 'title' => 'Prosedur Kunjungan',
                 'day' => 'Senin - Jumat',
                 'time' => '08:00 - 16:00',
-                'procedure' => 'Museum Maritim Indonesia hanya menerima kunjungan rombongan minimal 20 peserta.',
+                'procedure' => '<ol><li data-list="ordered"><span class="ql-ui" contenteditable="false"></span>Museum Maritim Indonesia hanya menerima kunjungan rombongan minimal 20 peserta.</li><li data-list="ordered"><span class="ql-ui" contenteditable="false"></span>Reservasi kunjungan dapat bersurat ke EGM Regional 2 Tanjung Priok.</li></ol>',
                 'thumbnail' => null,
                 'url' => 'https://maritimemuseum.id/'
             ],

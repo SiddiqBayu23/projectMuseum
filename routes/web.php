@@ -3,12 +3,16 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\BannerController as AdminBannerController;
-use App\Http\Controllers\Admin\CollectionController as AdminCollectionController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NavbarLinkController as AdminNavbarLinkController;
 use App\Http\Controllers\Admin\NavbarSectionController as AdminNavbarSectionController;
 use App\Http\Controllers\Admin\ServiceSectionController as AdminServiceSectionController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\VideoStreamingController as AdminVideoStreamingController;
+use App\Http\Controllers\Admin\CollectionCategoryController as AdminCollectionCategoryController;
+use App\Http\Controllers\Admin\CollectionController as AdminCollectionController;
+use App\Http\Controllers\Admin\PublicationCategoryController as AdminPublicationCategoryController;
+use App\Http\Controllers\Admin\PublicationController as AdminPublicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -35,12 +39,14 @@ Route::middleware(['unique.visitor'])->group(function () {
     Route::get('/kegiatan', [ActivityController::class, 'index'])->name('activity');
 
     Route::get('/koleksi', [CollectionController::class, 'index'])->name('collection');
+    Route::get('/koleksi/{slug}', [CollectionController::class, 'show'])->name('collection.show');
 
     Route::get('/profil', [ProfileController::class, 'index'])->name('profile');
 
     Route::get('/struktur', [StructureController::class, 'index'])->name('structure');
 
     Route::get('/publikasi', [PublicationController::class, 'index'])->name('publication');
+    Route::get('/publikasi/{slug}', [PublicationController::class, 'show'])->name('publication.show');
 });
 
 
@@ -77,10 +83,10 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/banners/update', [AdminBannerController::class, 'update'])->name('admin.banners.update');
         Route::delete('/banners/remove', [AdminBannerController::class, 'destroy'])->name('admin.banners.remove');
 
-        Route::get('/collections', [AdminCollectionController::class, 'index'])->name('admin.collections.index');
-        Route::post('/collections/store', [AdminCollectionController::class, 'store'])->name('admin.collections.store');
-        Route::put('/collections/update', [AdminCollectionController::class, 'update'])->name('admin.collections.update');
-        Route::delete('/collections/remove', [AdminCollectionController::class, 'destroy'])->name('admin.collections.remove');
+        Route::get('/categories', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
+        Route::post('/categories/store', [AdminCategoryController::class, 'store'])->name('admin.categories.store');
+        Route::put('/categories/update', [AdminCategoryController::class, 'update'])->name('admin.categories.update');
+        Route::delete('/categories/remove', [AdminCategoryController::class, 'destroy'])->name('admin.categories.remove');
 
         Route::get('/video-streamings', [AdminVideoStreamingController::class, 'index'])->name('admin.video-streamings.index');
         Route::post('/video-streamings/store', [AdminVideoStreamingController::class, 'store'])->name('admin.video-streamings.store');
@@ -91,6 +97,26 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/news/store', [AdminNewsController::class, 'store'])->name('admin.news.store');
         Route::put('/news/update', [AdminNewsController::class, 'update'])->name('admin.news.update');
         Route::delete('/news/remove', [AdminNewsController::class, 'destroy'])->name('admin.news.remove');
+
+        Route::get('/collection-categories', [AdminCollectionCategoryController::class, 'index'])->name('admin.collection-categories.index');
+        Route::post('/collection-categories/store', [AdminCollectionCategoryController::class, 'store'])->name('admin.collection-categories.store');
+        Route::put('/collection-categories/update', [AdminCollectionCategoryController::class, 'update'])->name('admin.collection-categories.update');
+        Route::delete('/collection-categories/remove', [AdminCollectionCategoryController::class, 'destroy'])->name('admin.collection-categories.remove');
+
+        Route::get('/publication-categories', [AdminPublicationCategoryController::class, 'index'])->name('admin.publication-categories.index');
+        Route::post('/publication-categories/store', [AdminPublicationCategoryController::class, 'store'])->name('admin.publication-categories.store');
+        Route::put('/publication-categories/update', [AdminPublicationCategoryController::class, 'update'])->name('admin.publication-categories.update');
+        Route::delete('/publication-categories/remove', [AdminPublicationCategoryController::class, 'destroy'])->name('admin.publication-categories.remove');
+
+        Route::get('/collections', [AdminCollectionController::class, 'index'])->name('admin.collections.index');
+        Route::post('/collections/store', [AdminCollectionController::class, 'store'])->name('admin.collections.store');
+        Route::put('/collections/update', [AdminCollectionController::class, 'update'])->name('admin.collections.update');
+        Route::delete('/collections/remove', [AdminCollectionController::class, 'destroy'])->name('admin.collections.remove');
+
+        Route::get('/publications', [AdminPublicationController::class, 'index'])->name('admin.publications.index');
+        Route::post('/publications/store', [AdminPublicationController::class, 'store'])->name('admin.publications.store');
+        Route::put('/publications/update', [AdminPublicationController::class, 'update'])->name('admin.publications.update');
+        Route::delete('/publications/remove', [AdminPublicationController::class, 'destroy'])->name('admin.publications.remove');
 
         Route::post('/news/upload-image', [AdminNewsController::class, 'uploadImage'])->name('admin.news.upload-image');
     });

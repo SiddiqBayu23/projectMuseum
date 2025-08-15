@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collection;
+use App\Models\CollectionCategory;
 use Illuminate\Http\Request;
 
 class CollectionController extends Controller
@@ -13,7 +15,9 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        return view('pages.collection.index');
+        $categories = CollectionCategory::get();
+        $collections = Collection::with('category')->paginate(12);
+        return view('pages.collection.index', compact('categories', 'collections'));
     }
 
     /**
@@ -43,9 +47,10 @@ class CollectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $collection = Collection::with('images')->where('slug', $slug)->firstOrFail();
+        return view('pages.collection.detail', compact('collection'));
     }
 
     /**

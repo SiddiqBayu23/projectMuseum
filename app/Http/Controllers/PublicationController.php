@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publication;
+use App\Models\PublicationCategory;
 use Illuminate\Http\Request;
 
 class PublicationController extends Controller
@@ -13,7 +15,12 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        return view('pages.publication.index');
+        $categories = PublicationCategory::get();
+        $publications = Publication::with('category')->get();
+        $latestPublication = Publication::with('category')
+            ->latest()
+            ->first();
+        return view('pages.publication.index', compact('categories', 'publications', 'latestPublication'));
     }
 
     /**
@@ -43,9 +50,15 @@ class PublicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $publication = Publication::where('slug', $slug)->firstOrFail();
+        $otherPublications = Publication::where('slug', '!=', $slug)
+            ->latest()
+            ->limit(4)
+            ->get();
+
+        return view('pages.publication.detail', compact('publication', 'otherPublications'));
     }
 
     /**

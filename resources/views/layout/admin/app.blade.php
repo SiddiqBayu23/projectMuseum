@@ -56,6 +56,13 @@
             /* jarak dari sisi kanan sidebar */
 
         }
+
+        #images-wrapper {
+            border: 2px dashed #ccc;
+            /* garis putus-putus */
+            background-color: #f9f9f9;
+            /* warna latar lembut */
+        }
     </style>
 </head>
 
@@ -71,7 +78,7 @@
                 {{-- header start --}}
                 @include('partials.admin.header')
                 {{-- header end --}}
-                <div class="container-fluid">
+                <div class="w-100 px-4" style="padding: 96px 0px 16px 0px">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title fw-semibold mb-4 text-black-50" style="font-size: 16px">
@@ -87,12 +94,12 @@
     @else
         @yield('content')
     @endif
-    <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('libs/datatables/js/dataTables.js') }}"></script>
     {{-- <script src="{{ asset('libs/datatables/js/bootstrap.bundle.min.js') }}"></script> --}}
     <script src="{{ asset('libs/datatables/js/dataTables.bootstrap5.js') }}"></script>
-    <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('libs/datatables/js/dataTables.buttons.js') }}"></script>
     <script src="{{ asset('libs/datatables/js/jszip.min.js') }}"></script>
     <script src="{{ asset('libs/datatables/js/pdfmake.min.js') }}"></script>

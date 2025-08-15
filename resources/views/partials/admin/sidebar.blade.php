@@ -73,6 +73,60 @@
                  </li>
 
                  <li class="sidebar-item">
+                     <a class="sidebar-link" href="javascript:void(0)" data-toggle="collapse"
+                         data-target="#collection-submenu" aria-expanded="false" style="position: relative;">
+                         <i class="fa fa-tasks"></i>
+                         <span class="hide-menu">Koleksi</span>
+                         <i class="fa fa-caret-down pull-right arrow-right"></i>
+                     </a>
+                     <ul id="collection-submenu" class="collapse first-level" style="padding-left: 20px;">
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.collection-categories.index') }}" class="sidebar-link">
+                                 <span>
+                                     <i class="fa fa-bars"></i>
+                                 </span>
+                                 <span class="hide-menu">Kategori</span>
+                             </a>
+                         </li>
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.collections.index') }}" class="sidebar-link">
+                                 <span>
+                                     <i class="fa fa-bars"></i>
+                                 </span>
+                                 <span class="hide-menu">Koleksi</span>
+                             </a>
+                         </li>
+                     </ul>
+                 </li>
+
+                 <li class="sidebar-item">
+                     <a class="sidebar-link" href="javascript:void(0)" data-toggle="collapse"
+                         data-target="#publication-submenu" aria-expanded="false" style="position: relative;">
+                         <i class="fa fa-tasks"></i>
+                         <span class="hide-menu">Publikasi</span>
+                         <i class="fa fa-caret-down pull-right arrow-right"></i>
+                     </a>
+                     <ul id="publication-submenu" class="collapse first-level" style="padding-left: 20px;">
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.publication-categories.index') }}" class="sidebar-link">
+                                 <span>
+                                     <i class="fa fa-bars"></i>
+                                 </span>
+                                 <span class="hide-menu">Kategori</span>
+                             </a>
+                         </li>
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.publications.index') }}" class="sidebar-link">
+                                 <span>
+                                     <i class="fa fa-bars"></i>
+                                 </span>
+                                 <span class="hide-menu">Publikasi</span>
+                             </a>
+                         </li>
+                     </ul>
+                 </li>
+
+                 <li class="sidebar-item">
                      <a class="sidebar-link" href="{{ route('admin.banners.index') }}" aria-expanded="false">
                          <span>
                              <i class="fa fa-image"></i>
@@ -81,11 +135,11 @@
                      </a>
                  </li>
                  <li class="sidebar-item">
-                     <a class="sidebar-link" href="{{ route('admin.collections.index') }}" aria-expanded="false">
+                     <a class="sidebar-link" href="{{ route('admin.categories.index') }}" aria-expanded="false">
                          <span>
                              <i class="fa fa-archive"></i>
                          </span>
-                         <span class="hide-menu">Koleksi</span>
+                         <span class="hide-menu">Kategori</span>
                      </a>
                  </li>
                  <li class="sidebar-item">
@@ -97,7 +151,8 @@
                      </a>
                  </li>
                  <li class="sidebar-item">
-                     <a class="sidebar-link" href="{{ route('admin.video-streamings.index') }}" aria-expanded="false">
+                     <a class="sidebar-link" href="{{ route('admin.video-streamings.index') }}"
+                         aria-expanded="false">
                          <span>
                              <i class="fa fa-video"></i>
                          </span>

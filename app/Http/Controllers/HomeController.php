@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Category;
 use App\Models\Collection;
 use App\Models\News;
+use App\Models\ServiceSection;
+use App\Models\VideoStreaming;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,9 +35,12 @@ class HomeController extends Controller
         $data = $visitors->pluck('total');
 
         $banners = Banner::where('is_active', 1)->get();
-        $collections = Collection::get();
+        $categories = Category::get();
         $news = News::limit(4)->orderBy('created_at', 'desc')->get();
-        return view('pages.home.index', compact('banners', 'collections', 'news', 'labels', 'data'));
+
+        $service = ServiceSection::first();
+        $video_streamings = VideoStreaming::limit(8)->get();
+        return view('pages.home.index', compact('banners', 'categories', 'news', 'labels', 'data', 'service', 'video_streamings'));
     }
 
     /**

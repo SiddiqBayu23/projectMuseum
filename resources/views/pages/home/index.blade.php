@@ -39,16 +39,16 @@
 
         <div class="w-100 px-4">
             <div class="row text-center mt-4">
-                @foreach ($collections as $collection)
+                @foreach ($categories as $category)
                     <div class="col-6 col-md-3 mb-3">
-                        <a href="{{ url($collection->url) }}" class="text-decoration-none text-secondary">
+                        <a href="{{ url($category->url) }}" class="text-decoration-none text-secondary">
                             <div class="kotak-ikon border-secondary">
                                 <div
                                     class="ratio ratio-1x1 d-flex justify-content-center align-items-center rounded-3 mb-3 overflow-hidden p-5">
-                                    <img src="{{ asset('storage/' . $collection->image) }}"
-                                        class="w-100 h-100 object-fit-cover" alt="{{ $collection->title }}">
+                                    <img src="{{ asset('storage/' . $category->image) }}"
+                                        class="w-100 h-100 object-fit-cover" alt="{{ $category->title }}">
                                 </div>
-                                <div class="judul-ikon">{{ $collection->title }}</div>
+                                <div class="judul-ikon">{{ $category->title }}</div>
                             </div>
                         </a>
                     </div>
@@ -60,23 +60,21 @@
                     <div class="col-12 col-md-3 d-flex flex-column justify-content-center text-end mb-4 mb-md-0 p-4">
                         <h3>Layanan</h3>
                         <p>
-                            SENIN - JUMAT<br>
-                            09.00 - 15.00 WIB
+                            {{ $service->day }}<br>
+                            {{ $service->time }}
                         </p>
                     </div>
                     <div class="col-12 col-md-5 d-flex flex-column justify-content-center text-start mb-4 mb-md-0 p-4">
                         <h4>Prosedur Kunjungan</h4>
-                        <ol>
-                            <li>Museum Maritim Indonesia hanya menerima kunjungan rombongan minimal 20 peserta.</li>
-                            <li>Reservasi kunjungan dapat bersurat ke EGM Regional 2 Tanjung Priok.</li>
-                        </ol>
+                        {!! $service->procedure !!}
                     </div>
                     <div class="col-12 col-md-4 text-center">
-                        <a href="https://maritimemuseum.id/" target="_blank">
-                            <img src="images/virtualmuseum.jpg" alt="Virtual Museum" class="img-fluid">
+                        <a href="{{ $service->url }}" target="_blank">
+                            <img src="{{ $service->thumbnail ? asset('storage/' . $service->thumbnail) : asset('images/virtualmuseum.jpg') }}"
+                                alt="Virtual Museum" class="img-fluid">
                         </a>
                         <div class="teks-gambar mt-2">
-                            <a href="https://maritimemuseum.id/"></a>
+                            <a href="{{ $service->url }}"></a>
                         </div>
                     </div>
                 </div>
@@ -93,9 +91,11 @@
             <div class="col-md-7 text-start">
                 <h4 class="fw-bold mb-3">YOUTUBE & IG LIVE</h4>
                 <div class="instagram-grid text-center">
-                    <?php for ($i=0; $i < 10; $i++) { ?>
-                    <img src="images/museum.jpg" class="img-youtube">
-                    <?php } ?>
+                    @foreach ($video_streamings as $video_streaming)
+                        <a href="{{ $video_streaming->video_url }}" target="_blank"><img
+                                src="{{ asset('storage/' . $video_streaming->thumbnail) }}" class="img-youtube"></a>
+                    @endforeach
+
                 </div>
                 <div class="text-center">
                     <a href="https://www.youtube.com/" class="btn btn-primary mt-3">LIHAT VIDEO</a>
